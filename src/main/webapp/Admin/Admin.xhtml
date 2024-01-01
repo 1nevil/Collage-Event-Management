@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout.xhtml">
+            <ui:define name="content">
+
+                <f:view>
+
+
+                    <h:form  style="margin-top:2rem" >
+                        <h1 class="text-center"><h:outputText class=" text-secondary" value="Admins"/></h1>
+
+                        <div style="max-width: 100%; overflow: scroll; text-overflow: ellipsis; white-space: nowrap;" >
+                            <h:dataTable  class="table table-bordered table-striped "  value="#{adminBean.admins}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="RegisterId"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.registerId}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Username"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.username}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Email"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.email}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="PhoneNo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.phoneNo}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DateOfBirth"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dateOfBirth}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Address"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.address}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="MyImg"/>
+                                    </f:facet>
+                                    <!--<img src="#{item.myImg}" height="100"/>-->
+                                    <h:graphicImage library="images" name="#{item.myImg}" height="100"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="CreatedAt"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.createdAt}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Role"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.roleId.role}"/>
+                                </h:column>
+
+                            </h:dataTable>
+                        </div>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

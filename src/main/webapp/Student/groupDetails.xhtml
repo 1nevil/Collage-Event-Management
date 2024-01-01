@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <f:metadata>
+            <f:viewParam name="eventId" value="#{studentBean.eventId}" />
+            <f:event type="preRenderView" listener="#{studentBean.loadItemDetails()}" />
+        </f:metadata>
+        <style>
+            .group-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+
+            .group-name {
+                margin-bottom: 10px;
+            }
+
+            .enroll-btn {
+                margin-left: 5rem;
+            }
+
+            .divider {
+                width: 100%;
+                border: 1px solid #000;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:composition template="userLayout.xhtml">
+            <ui:define name="content">
+
+                <section class="mt-5 mb-4">
+                    <div class="container text-dark">
+                        <header class="mb-4">
+                            <h3>Groups Of the Event</h3>
+                            <hr />
+                            <div>
+                                <ui:fragment rendered="#{not empty studentBean.groups}">
+                                    <ui:repeat value="#{studentBean.groups}" var="group">
+                                        <div class="group-container d-flex ">
+                                            <h:outputLabel class="group-name text-primary text-capitalize font-weight-bold h3" value="#{group.groupName}" />      
+
+
+                                            <h:form  style="margin-left:auto" >
+                                                <h:commandButton class="enroll-btn btn btn-primary mx-1 " onclick="#{studentBean.getParticpationByGroupId(group.groupId)}"  value="See group Details" />
+                                              </h:form>
+                                            <br/>
+
+
+
+                                            <hr class="divider" />
+                                        </div>
+                                    </ui:repeat>
+
+                                </ui:fragment>
+                                <ui:fragment rendered="#{empty studentBean.groups}">
+                                    <p class="text-primary">No participation are their.</p>
+                                </ui:fragment>
+
+                            </div>
+                            <div>
+                                <ui:fragment rendered="#{not empty studentBean.participation}">
+                                    <ui:repeat value="#{studentBean.participation}" var="participation">
+                                        <h:outputLabel value="#{participation.registerId.username}"></h:outputLabel>
+                                    </ui:repeat>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{empty studentBean.participation}">
+                                    <p class="text-primary">No participation are their.</p>
+                                </ui:fragment>
+                            </div>
+                        </header>
+                    </div>
+                </section>
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout.xhtml">
+            <ui:define name="content">
+                <h:form style="margin-top:2rem" >
+                    <h1 class="text-center text-secondary"><h:outputText  value="Participation Details By Event"/></h1>
+                    <f:view>
+                        <div  style="max-width: 100%; overflow: scroll; text-overflow: ellipsis; white-space: nowrap;" >
+                            <h:dataTable class="table datatable"  value="#{adminBean.events}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Get group details"/>
+                                    </f:facet>
+                                    <h:commandButton class="btn btn-dark" value="Groups" action="#{adminBean.getGroupsByEventId(item.eventId)}"/>
+                                </h:column> 
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="EventId"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.eventId}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Title"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.title}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Description"/>
+                                    </f:facet>
+                                    <div style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" >
+                                        <h:outputText value="#{item.description}" title="#{item.description}" />
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="StartTime"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.startTime}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="EndTime"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.endTime}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Address"/>
+                                    </f:facet>
+                                    <div style="max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" >
+                                        <h:outputText  value="#{item.address}" />
+                                    </div>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Pincode"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.pincode}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IsGallary"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.isGallary}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IsGroup"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.isGroup}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="StartDate"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.startDate}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="EndDate"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.endDate}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NoOfRegistration"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.noOfRegistration}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="EventImg"/>
+                                    </f:facet>
+                                    <img style="height:10rem;width: 16rem;"  src="#{item.eventImg}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="MaxPeopleGroup"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.maxPeopleGroup}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Category"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.categoryId.categoryName}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Register Pers  on"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.registerId.username}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </div>
+
+                        <h:form >
+                            <h5  class="mt-5 text-center text-secondary"><h:outputText  value="All groups of selected event"/></h5>
+                            <h:dataTable class="table datatable"  rendered="#{not empty adminBean.groups}" value="#{adminBean.groups}" var="item">
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="GroupId"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.groupId}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="GroupName"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.groupName}"/>
+                                </h:column>
+
+                            </h:dataTable>
+                            <h:panelGroup rendered="#{empty adminBean.groups}">
+                                <hr/>
+                                <h:outputText class="text-danger h5" value="Click the Get group details button to display groups."/>
+                            </h:panelGroup> 
+                        </h:form>
+
+                    </f:view>
+                    <f:view>
+
+
+                        <!--                        <h:form>
+                                                    <h1><h:outputText value="List"/></h1>
+                                                    <h:dataTable class="table table-bordered" rendered="#{not empty adminBean.participations}" style="width: 30rem" value="#{adminBean.participations}" var="item">
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="ParticipationId"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.participationId}"/>
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="GroupId"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.groupId}"/>
+                                                        </h:column>
+                                                        <h:column>
+                                                            <f:facet name="header">
+                                                                <h:outputText value="RegisterId"/>
+                                                            </f:facet>
+                                                            <h:outputText value="#{item.registerId}"/>
+                                                        </h:column>
+                                                    </h:dataTable>
+                                                    <h:panelGroup rendered="#{empty adminBean.participations}">
+                                                        <h:outputText class="text-dark h5" value="Click the button to display data."/>
+                                                    </h:panelGroup> 
+                                                </h:form>-->
+                    </f:view>
+
+
+
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="userLayout.xhtml">
+            <ui:define name="content">
+                <div class="bg-dark text-white py-5">
+                    <!--<img src="../resources/images/banner.png"/>-->
+                    <div class="container py-5">
+                        <h1>
+                            Elevate Your Events, <br/>Amplify the Experience.
+                        </h1>
+                        <p>Seamless Celebrations, Unforgettable Experiences</p>
+                        <button type="button" class="btn btn-outline-light">
+                            Learn more
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-light shadow-0 text-primary pt-2 border border-white"
+                            >
+                            <span class="pt-1">See Events now</span>
+                        </button>
+                    </div>
+                </div>
+                <section>
+                    <div class="container my-5">
+                        <header class="mb-4">
+                            <h3>Events</h3>
+                        </header>
+
+                        <div class="row">
+
+                            <ui:repeat value="#{adminBean.events}" var="event" >
+                                <div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+                                    <div class="card w-100 my-2 shadow-2-strong">
+                                        <!--                                        <img
+                                                                                    src="#{event.eventImg}"
+                                                                                    class="card-img-top"
+                                                                                    style="aspect-ratio: 1 / 1"
+                                                                                    />-->
+                                        <h:graphicImage library="images" name="#{event.eventImg}"  class="card-img-top"  style="object-fit: cover"/>
+                                        <div class="card-body d-flex flex-column">
+                                            <h:outputLabel class="card-title h4" value="#{event.title}"></h:outputLabel>
+                                            <h:outputLabel class="card-title" value="Enrolled : #{event.noOfRegistration}"></h:outputLabel>
+                                            <h:outputLabel class="card-title" value="Start Date : #{event.startDate}" ></h:outputLabel>
+                                            <h:outputLabel class="card-title" value="End Date : #{event.endDate}" ></h:outputLabel>
+
+                                            <div
+                                                class="card-footer  pt-3 px-0 pb-0 mt-auto"
+                                                >
+                                                <a  href="/event_management/Student/details.jsf?eventId=#{event.eventId}" class="btn btn-primary shadow-0 me-1" style="width: 100%" >see more detail</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+
+
+                        </div>
+                    </div>
+                </section>
+
+            </ui:define>
+        </ui:composition>
+        <!--        <script>
+                    function redirectToDetail(eventId) {
+                        window.location.href = 'details.jsf?eventId=' + eventId;
+                        }
+                </script>-->
+    </h:body>
+</html>

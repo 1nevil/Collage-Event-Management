@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link href="assets/css/style.css" rel="stylesheet"></link>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout.xhtml">
+            <ui:define name="content">
+                <main id="main" class="main" style="margin-left: -1rem;margin-top: -1rem">
+
+                    <div class="pagetitle">
+                        <h1>Profile</h1>
+                        <nav>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item">Users</li>
+                                <li class="breadcrumb-item active">Profile</li>
+                            </ol>
+                        </nav>
+                    </div><!-- End Page Title -->
+
+                    <section class="section profile">
+                        <div class="row">
+                            <div class="col-xl-4">
+
+                                <div class="card">
+                                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                                        <!--<img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"/>-->
+                                        <h:graphicImage library="images" name="#{sessionScope.User.myImg}" height="100"  alt="Profile" class="rounded-circle"/>
+
+                                        <h2>#{sessionScope.User.username}</h2>
+                                        <div class="social-links mt-2">
+                                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xl-8">
+
+                                <div class="card">
+                                    <div class="card-body pt-3">
+                                        <!-- Bordered Tabs -->
+                                        <ul class="nav nav-tabs nav-tabs-bordered">
+
+                                            <li class="nav-item">
+                                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                                            </li>
+
+
+
+                                            <li class="nav-item">
+                                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                                            </li>
+
+                                        </ul>
+                                        <div class="tab-content pt-2">
+
+                                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                                                <h5 class="card-title">Profile Details</h5>
+
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                                                    <div class="col-lg-9 col-md-8">#{sessionScope.User.username}</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Email</div>
+                                                    <div class="col-lg-9 col-md-8">#{sessionScope.User.email}</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Phone No</div>
+                                                    <div class="col-lg-9 col-md-8">+(91) #{sessionScope.User.phoneNo}</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Address</div>
+                                                    <div class="col-lg-9 col-md-8">#{sessionScope.User.address}</div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-4 label">Date Of Birth</div>
+                                                    <div class="col-lg-9 col-md-8">#{sessionScope.User.dateOfBirth}</div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="tab-pane fade pt-3" id="profile-change-password">
+                                                <!-- Change Password Form -->
+                                                <h:form>
+
+                                                    <div class="row mb-3">
+                                                        <label for="currentEmail" class="col-md-4 col-lg-3 col-form-label">email</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <h:inputText  class="form-control" id="currentEmail" value="#{sessionScope.User.email}" required="true" requiredMessage="** Email can not be blank"/>
+                                                            <h:message  for="currentEmail" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                                                        <div class="col-md-8 col-lg-9">
+                                                            <h:inputText  value="#{studentBean.newPassword}" class="form-control" id="newPassword" required="true" requiredMessage="** Password can not be blank"/>
+                                                            <h:message  for="newPassword" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <h:commandButton value="Change Password" action="#{studentBean.updatePassword()}" class="btn btn-primary"></h:commandButton>
+                                                    </div>
+                                                </h:form><!-- End Change Password Form -->
+
+                                            </div>
+
+                                        </div><!-- End Bordered Tabs -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+                </main><!-- End #main -->
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

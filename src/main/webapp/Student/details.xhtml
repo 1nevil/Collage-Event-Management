@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.0.0/mdb.min.css"
+            rel="stylesheet"
+            />
+        <title>Single Product Page</title>
+        <!-- css -->
+        <f:metadata>
+            <f:viewParam name="eventId" value="#{studentBean.eventId}" />
+            <f:event type="preRenderView" listener="#{studentBean.loadItemDetails()}" />
+        </f:metadata>
+        <link rel="stylesheet" href="css/styles.css" />
+    </h:head>
+    <h:body>
+        <ui:composition template="userLayout.xhtml">
+            <ui:define name="content">
+
+    <!--<h:outputText value="#{param['eventId']}" />-->
+                <section class="product-container d-flex p-4 " style="font-size: 1.2rem">
+                    <div class="img-card w-50 d-flex justify-content-center p-5" >
+                        <!--<img style="height:30rem;width: 30rem;" src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"/>-->
+                        <h:graphicImage library="images" name="#{studentBean.img}"   class="card-img-top"  style="object-fit: cover;height: 10rem;width: 20rem"/>
+                    </div>
+
+                    <div class="product-info p-5" style="margin-left: 3rem">
+                        <h2><h:outputLabel class="text-uppercase" value="#{studentBean.title}"/></h2>
+                        <p>
+                            <h:outputLabel value="Discription   : " class="text-primary h5 text-capitalize"/> <h:outputLabel style="text-align: justify" value="#{studentBean.description}"/>
+                        </p>
+                        <p class="d-flex align-item-center">
+                            <h:outputLabel value="Address Of the Event   : " class="text-primary h5 "/>  <h:outputLabel class="mx-3 text-capitalize" value="#{studentBean.address}"/>
+                        </p>
+                        <p class="d-flex ">
+                            <h:outputLabel value="Pincode   : " class="text-primary h5 "/>  <h:outputLabel class="mx-3 text-capitalize"  value="#{studentBean.pincode}"/>
+                        </p>
+                        <p class="d-flex "> <h:outputLabel value="Max People In Group   : " class="text-primary h5 "/> <h:outputLabel class="mx-3 text-capitalize"  value="#{studentBean.numberOfPeopleInGroup}"/>
+                        </p>
+                        <p class="d-flex "><h:outputLabel value="Start Date to Enroll: " class="text-primary h5 "/>  <h:outputLabel class="mx-3 text-capitalize"  value="#{studentBean.startDate}"/><h:outputLabel value="End Date to Enroll : " class="text-primary h5 "/> <h:outputLabel value="#{studentBean.endDate}"/>
+                        </p>
+                        <p class="d-flex "><h:outputLabel value="Start Time :" class="text-primary h5 "/> <h:outputLabel class="mx-3 text-capitalize"  value="#{studentBean.startTime}"/><br/><h:outputLabel value="End time: " class="text-primary h5 "/> <h:outputLabel value="#{studentBean.endTime}"/>
+                        </p>
+                        <h:form>
+                            <div class="quantity">
+                                <h:inputText label="Enter group name" required="true" value="#{studentBean.groupNameInput}" style="p-1"/>
+                                <h:commandButton class="btn btn-dark" onclick="#{studentBean.createAndEnroll(studentBean.eventId)}" value="Enroll In event"></h:commandButton>
+                            </div>
+                        </h:form>
+                    </div>  
+
+                </section>
+                <section class="mt-5 mb-4">
+                    <div class="container text-dark">
+                        <header class="mb-4">
+                            <h3>Sponser Of the Event</h3>
+                            <hr />
+                        </header>
+
+                        <div class="row">
+                            <ui:fragment rendered="#{not empty studentBean.sponsers}">
+                                <ui:repeat value="#{studentBean.sponsers}" var="sponser"  >
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                        <article>
+                                            <a href="#" class="img-fluid">
+                                                <!--                                                <img
+                                                                                                    class="rounded w-100"
+                                                                                                    src="#{sponser.sponserImg}"
+                                                                                                    style="object-fit: contain"
+                                                                                                    height="160"
+                                                                                                    />-->
+
+                                                <h:graphicImage library="images" name="#{sponser.sponserImg}"  class="card-img-top"  style="object-fit: cover"/>
+                                            </a>
+                                            <div class="mt-2 text-muted small d-block mb-1">
+                                                <h4 class="text-dark text-center" style="text-transform: capitalize"><h:outputLabel value="#{sponser.sponserName}"/></h4>
+                                                <p style="text-align: center; font-size: 1.2rem"><h:outputLabel value="#{sponser.sponserDescription}" /></p>
+                                                <p class="text-dark" style="text-align: center; font-size: 1.2rem">Linked In : #{sponser.sponserContact}</p>
+                                            </div>
+                                        </article>
+
+                                    </div>
+                                </ui:repeat>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{empty studentBean.sponsers}">
+                                <p class="text-primary">No sponsor available.</p>
+                            </ui:fragment>
+                        </div>
+                    </div>
+                </section>
+                <section class="mt-5 mb-4">
+                    <div class="container text-dark">
+                        <header class="mb-4 row">
+                            <h3>Awards details Of the Event</h3>
+                            <hr />
+                            <ui:fragment rendered="#{not empty studentBean.awards}">
+                                <ui:repeat value="#{studentBean.awards}" var="award"  >
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                        <article>
+                                            <a href="#" class="img-fluid"> </a>
+                                            <div class="mt-2 text-muted small d-block mb-1">
+                                                <h5 class="text-dark text-center">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trophy " viewBox="0 0 16 16">
+                                                        <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z"/>
+                                                    </svg>
+
+                                                    <h:outputLabel class="text-primary" style="margin-left: 1rem" value="#{award.awardTitle}" /></h5>
+                                                <p>
+                                                    <h:outputLabel style="margin:1rem;" value="#{award.awardDescription}" />
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </ui:repeat>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{empty studentBean.awards}">
+                                <p class="text-primary">Awards of the event Should be annouced.</p>
+                            </ui:fragment>
+                        </header>
+                    </div>
+                </section>
+                <section class="mt-5 mb-4">
+                    <div class="container text-dark">
+                        <header class="mb-4 row">
+                            <h3>Winner Of the Event</h3>
+                            <hr />
+                            <ui:fragment rendered="#{not empty studentBean.winners}">
+                                <ui:repeat value="#{studentBean.winners}" var="winner"  >
+                                    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                        <article>
+                                            <a href="#" class="img-fluid"> </a>
+                                            <div class="mt-2 text-muted small d-block mb-1">
+                                                <h5 class="text-dark text-center">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-trophy " viewBox="0 0 16 16">
+                                                        <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935M3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z"/>
+                                                    </svg>
+                                                    <h:outputLabel class="text-primary" style="margin-left: 1rem" value="#{winner.winnerTitle}" />
+                                                    <h:outputLabel style="margin:1rem;" value="#{winner.groupId.groupName}" />
+
+                                                </h5>
+                                                <p>
+                                                </p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </ui:repeat>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{empty studentBean.winners}">
+                                <p class="text-primary">Winners of the event Should be annouced.</p>
+                            </ui:fragment>
+                        </header>
+                    </div>
+                </section>
+                <section class="mt-5 mb-4">
+                    <div class="container text-dark">
+                        <a class="btn btn-primary"  href="/event_management/Student/groupDetails.jsf?eventId=#{studentBean.eventId}">See group Details</a>
+                    </div>
+                </section>
+            </ui:define>
+        </ui:composition>
+        <!-- script tags -->
+        <script src="js/cart.js"></script>
+    </h:body>
+</html>

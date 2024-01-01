@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="layout.xhtml">
+            <ui:define name="content">
+                <f:view>
+
+                    <div class="container form-container">
+                        <h1 class="text-center text-secondary">Create Event</h1>
+                        <h:form enctype="multipart/form-data">
+                            <div class="form-group row mb-2">
+                                <h:outputLabel value="Event Id"   for="EventId" />                   
+                                <div class="col-sm-12">
+                                    <h:inputText id="EventId" value="#{adminBean.eventId}" class="form-control" required="true" requiredMessage="The Title field is required." />
+                                </div>
+                            </div>
+                            <div class="form-group row mb-2">
+                                <h:outputLabel value="Event title"   for="title" />                   
+                                <div class="col-sm-12">
+                                    <h:inputText id="title" value="#{adminBean.title}" class="form-control" required="true" requiredMessage="The Title field is required." />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Description:" />
+                                <div class="col-sm-12">
+                                    <h:inputTextarea  cols="30" rows="5" id="description" value="#{adminBean.description}" class="form-control" required="true" requiredMessage="The Description field is required." />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Event Start Time"/>
+                                <div class="col-sm-12">
+                                    <h:inputText id="startTime" value="#{adminBean.startTime}" title="StartTime" required="true" requiredMessage="The StartTime field is required." class="form-control"/>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="End Time"/>
+                                <div class="col-sm-12">
+                                    <h:inputText id="endTime" value="#{adminBean.endTime}" title="EndTime" required="true" class="form-control" requiredMessage="The EndTime field is required."/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class="col-form-label" for="description" value="Address of the Event" />
+                                <div class="col-sm-12">
+                                    <h:inputText id="address" value="#{adminBean.address}" title="Address" class="form-control" required="true" requiredMessage="The Address field is required."/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Pincode of the Event"/>
+                                <div class="col-sm-12">
+                                    <h:inputText id="pincode" value="#{adminBean.pincode}" title="Pincode" required="true" class="form-control" requiredMessage="The Pincode field is required."/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Event contains Gallary"/>
+                                <div class="col-sm-12">
+                                    <h:selectOneMenu value="#{adminBean.isGallary}" class="form-control">
+                                        <f:selectItem itemLabel="Yes" itemValue="1" />
+                                        <f:selectItem itemLabel="No" itemValue="0" />
+                                    </h:selectOneMenu></div>
+
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Event Contains Group"/>
+                                <div class="col-sm-12">
+                                    <h:selectOneMenu value="#{adminBean.isGroup}" class="form-control">
+                                        <f:selectItem itemLabel="Yes" itemValue="1" />
+                                        <f:selectItem itemLabel="No" itemValue="0" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Enter Start date"/>
+                                <div class="col-sm-12">
+                                    <h:inputText id="startDate" value="#{adminBean.startDate}" title="StartDate" required="true" class="form-control" requiredMessage="The StartDate field is required."/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Enter the End date"/>
+                                <div class="col-sm-12">
+                                    <h:inputText id="endDate" value="#{adminBean.endDate}" title="EndDate" required="true" class="form-control" requiredMessage="The EndDate field is required."/>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Add Event image"/>
+                                <div class="col-sm-12">
+                                    <h:inputFile id="image" value="#{adminBean.file}"  class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <h:outputLabel class=" col-form-label" for="description" value="Max people In group"/>
+                                <div class="col-sm-12">
+                                    <h:inputText id="maxPeopleGroup" value="#{adminBean.numberOfPeopleInGroup}" title="MaxPeopleGroup" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-3">
+                                <h:outputLabel class=" col-form-label" for="description" value="Select Category"/>
+                                <div class="col-sm-12">
+                                    <h:selectOneMenu value="#{adminBean.categoryId}" class="form-control">
+                                        <f:selectItems value="#{adminBean.getAllCategory()}"  var="cat" itemLabel="#{cat.categoryName}" itemValue="#{cat.categoryId}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-2">
+                                <div class="col-sm-12 ">
+                                    <h:commandButton value="Insert Events" action="#{adminBean.updateEvent()}" class="btn btn-secondary" />
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </f:view>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
